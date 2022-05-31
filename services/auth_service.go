@@ -1,6 +1,7 @@
 package services
 
 import (
+	"errors"
 	"simple-jwt-golang/entities"
 	"simple-jwt-golang/repositories"
 )
@@ -18,5 +19,13 @@ func NewAuthService(r repositories.AuthRepository) *authSerAuthService {
 }
 
 func (r authSerAuthService) Login(dataLogin entities.AuthEntity) error {
-	return nil
+	find_user, err := r.r.FindUsernamePassword(dataLogin.Username)
+	if err != nil {
+		return err
+	}
+
+	if dataLogin.Username == find_user.Username && dataLogin.Password == dataLogin.Password {
+		return nil
+	}
+	return errors.New("Please check your username and password")
 }

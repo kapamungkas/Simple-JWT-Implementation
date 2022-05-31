@@ -1,6 +1,7 @@
 package repositories
 
 import (
+	"errors"
 	"simple-jwt-golang/entities"
 )
 
@@ -15,5 +16,11 @@ func NewAuthRepository() *authRepository {
 }
 
 func (r authRepository) FindUsernamePassword(username string) (entities.AuthEntity, error) {
-	return entities.AuthEntity{}, nil
+	if username == "admin" {
+		return entities.AuthEntity{
+			Username: "admin",
+			Password: "admin",
+		}, nil
+	}
+	return entities.AuthEntity{}, errors.New("user not found")
 }

@@ -3,7 +3,6 @@ package handlers
 import (
 	"fmt"
 	"net/http"
-	"os"
 	"simple-jwt-golang/entities"
 	"simple-jwt-golang/requests"
 	"simple-jwt-golang/services"
@@ -14,10 +13,10 @@ import (
 	"github.com/go-playground/validator/v10"
 )
 
-var APPLICATION_NAME = os.Getenv("APPLICATION_NAME")
+var APPLICATION_NAME = "simple_jwt"
 var LOGIN_EXPIRATION_DURATION = time.Duration(1) * time.Hour
 var JWT_SIGNING_METHOD = jwt.SigningMethodHS256
-var JWT_SIGNATURE_KEY = []byte(os.Getenv("JWT_SIGNATURE_KEY"))
+var JWT_SIGNATURE_KEY = []byte("simple_signature_2893423847234")
 
 type UserJWT struct {
 	jwt.StandardClaims
